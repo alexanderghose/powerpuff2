@@ -7,23 +7,34 @@ let lastY = window.innerHeight/2;
 
 function get_new_X() {
     console.log(window.innerWidth)
-    let movement = (Math.random()*100)-50;
-    lastX = Math.min(Math.max(0,lastX + movement),window.innerWidth);
+    let movement = (Math.random()*200);
+    lastX = lastX + get_sign() * movement;
     return lastX;
 }
 
 function get_new_Y() {
-    let movement = (Math.random()*100)-50;
-    lastY = Math.min(Math.max(0,lastY + movement),window.innerHeight);
+    let movement = (Math.random()*200);
+    lastY = lastY + get_sign() * movement;
     return lastY;
 }   
 
+function get_sign() {
+    if (Math.floor(Math.random() * 2) == 1) {
+        return +1
+    } else {
+        return -1;
+    }
+}
+
 function render() {
     let body = document.querySelector('body');
+
+    // remove all dom elements
     while (body.lastChild) {
       body.removeChild(body.lastChild);
     }
 
+    // re-create enemy 1 in the dom
     let enemy1 = document.createElement('img');
     enemy1.src="mojo.png";
     enemy1.style.width="10%";
@@ -36,6 +47,7 @@ function render() {
     enemy1.style.top=get_new_Y() + 'px';
     console.log("new_x:",enemy1.style.left);
 
+    // re-create enemy 2 in the dom
     let enemy2 = document.createElement('img');
     enemy2.src="mojo.png";
     enemy2.style.width="10%";
