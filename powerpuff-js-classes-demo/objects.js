@@ -2,15 +2,23 @@
 class Enemy { // declaring a class
     constructor(borderThickness=1, borderColor="red") {
         this.health = 100;
-        this.X = Math.floor(Math.random()*window.innerWidth);
-        this.Y = Math.floor(Math.random()*window.innerHeight);
+        this.X = this.getRandomXPosition();
+        this.Y = this.getRandomYPosition();
         this.dom_element = null;
 
-        this.draw(borderThickness, borderColor);
-        this.move();
+        this.drawMe(borderThickness, borderColor);
+        this.startMoving();
     }
 
-    draw = (borderThickness, borderColor) => {
+    getRandomXPosition() {
+        return Math.floor(Math.random()*window.innerWidth)
+    }
+
+    getRandomYPosition() {
+        return Math.floor(Math.random()*window.innerHeight);
+    }
+
+    drawMe = (borderThickness, borderColor) => {
         let body = document.querySelector('body');
         let enemy = document.createElement('img');
         enemy.src="mojo.png";
@@ -23,7 +31,7 @@ class Enemy { // declaring a class
 
         enemy.addEventListener('click', this.handleClicked);
 
-         // will succeed
+        // old way:
         // this.boundClicked = evt => this.clicked(evt);
         // enemy.addEventListener('click',this.boundClicked);
 
@@ -36,11 +44,11 @@ class Enemy { // declaring a class
         alert("Ahhh! You got me! My health is now " + this.health);
     }
 
-    move = () => {
+    startMoving = () => {
         this.dom_element.style.left=this.get_new_X() + 'px';
         this.dom_element.style.top=this.get_new_Y() + 'px';
         console.log("move called");
-        setTimeout(this.move,500)
+        setTimeout(this.startMoving,500)
     }
 
     get_sign() {
@@ -76,8 +84,12 @@ class HealthyEnemy extends Enemy { // inheritance
 
 let enemy1 = new Enemy("1","green"); // instantiate a class
 let enemy2 = new HealthyEnemy() // instantiating a child
-let enemies = []
-for (let i = 0; i < 10; i++) {
-    let randomEnemy = new Enemy(Math.floor(Math.random()*100));
-    enemies.push(randomEnemy);
-}
+
+// instantiating a lot of enemies
+// let enemies = []
+// for (let i = 0; i < 300; i++) {
+//     let randomColour = "#" + Math.floor(Math.random()*16777215).toString(16)
+//     let randomThickness = Math.floor(Math.random()*100)
+//     let randomEnemy = new Enemy(randomThickness, randomColour);
+//     enemies.push(randomEnemy);
+// }
