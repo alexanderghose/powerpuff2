@@ -86,10 +86,10 @@ let enemy1 = new Enemy("1","green"); // instantiate a class
 let enemy2 = new HealthyEnemy() // instantiating a child
 
 // instantiating a lot of enemies
-// let enemies = []
-// for (let i = 0; i < 300; i++) {
-//     let randomColour = "#" + Math.floor(Math.random()*16777215).toString(16)
-//     let randomThickness = Math.floor(Math.random()*100)
-//     let randomEnemy = new Enemy(randomThickness, randomColour);
-//     enemies.push(randomEnemy);
-// }
+let enemies = []
+for (let i = 0; i < 30; i++) {
+    let randomColour = "#" + Math.floor(Math.random()*16777215).toString(16)
+    let randomThickness = Math.floor(Math.random()*100)
+    let randomEnemy = new Enemy(randomThickness, randomColour);
+    enemies.push(randomEnemy);
+}
